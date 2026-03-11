@@ -1,0 +1,59 @@
+{
+  "entities": {
+    "Member": {
+      "title": "Member",
+      "description": "A member of the room/mess.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name of the member" },
+        "roomRentEnabled": { "type": "boolean", "description": "Whether this member pays room rent" },
+        "messBillEnabled": { "type": "boolean", "description": "Whether this member participates in mess billing" },
+        "totalDays": { "type": "number", "description": "Total days the member stayed in the mess" },
+        "uid": { "type": "string", "description": "The UID of the user who created this member" }
+      },
+      "required": ["name", "roomRentEnabled", "messBillEnabled", "totalDays", "uid"]
+    },
+    "Purchase": {
+      "title": "Purchase",
+      "description": "A purchase made for the mess.",
+      "type": "object",
+      "properties": {
+        "description": { "type": "string", "description": "What was bought" },
+        "amount": { "type": "number", "description": "Cost of the purchase" },
+        "date": { "type": "string", "format": "date-time", "description": "When the purchase was made" },
+        "memberId": { "type": "string", "description": "ID of the member who made the purchase" },
+        "uid": { "type": "string", "description": "The UID of the user who created this purchase" }
+      },
+      "required": ["description", "amount", "date", "memberId", "uid"]
+    },
+    "Summary": {
+      "title": "Summary",
+      "description": "Monthly summary of expenses.",
+      "type": "object",
+      "properties": {
+        "month": { "type": "string", "description": "Month and year (e.g., March 2026)" },
+        "totalRoomRent": { "type": "number", "description": "Total room rent for the month" },
+        "totalPurchase": { "type": "number", "description": "Total purchase amount" },
+        "totalDays": { "type": "number", "description": "Total days stayed by all members" },
+        "perDayRate": { "type": "number", "description": "Calculated per day rate" },
+        "memberDetails": { "type": "string", "description": "JSON string of member calculations" },
+        "uid": { "type": "string", "description": "The UID of the user who created this summary" }
+      },
+      "required": ["month", "totalRoomRent", "totalPurchase", "totalDays", "perDayRate", "memberDetails", "uid"]
+    }
+  },
+  "firestore": {
+    "/members/{memberId}": {
+      "schema": "Member",
+      "description": "Collection of members"
+    },
+    "/purchases/{purchaseId}": {
+      "schema": "Purchase",
+      "description": "Collection of purchases"
+    },
+    "/summaries/{summaryId}": {
+      "schema": "Summary",
+      "description": "Collection of historical summaries"
+    }
+  }
+}

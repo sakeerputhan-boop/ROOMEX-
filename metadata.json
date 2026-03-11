@@ -1,0 +1,5 @@
+{
+  "name": "Remix: ROOMEX",
+  "description": "Mess and room expense sharing and management app with stay-based billing, purchase tracking, and colorful PDF reports.",
+  "requestFramePermissions": []
+}
